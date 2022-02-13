@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <menuitem name="estate" id="estate.menu_root"/>
+<!--           <menuitem id="estate_menu_root" name="estate">-->
+<!--            &lt;!&ndash; menu categories &ndash;&gt;-->
+        <menuitem name="First Menu" id="First_level_estate_menu" parent="estate.menu_root"/>
+<!--            <menuitem id="first_level_estate_menu" name="First Menu">-->
+        <menuitem id="estate_model_menu_action" parent="First_level_estate_menu"/>
+<!--                <menuitem id="estate_model_action_level" action="estate_model_action"/>-->
+<!--            </menuitem>-->
+<!--        </menuitem>-->
+
+
+<!--        - -->
+<!--    <menuitem name="estate" id="estate.menu_root"/>-->
+<!--&ndash;&gt;-->
+<!--    &lt;!&ndash; menu categories &ndash;&gt;-->
+
+<!--    <menuitem name="Menu 1" id="estate.menu_1" parent="estate.menu_root"/>-->
+<!--    <menuitem name="Menu 2" id="estate.menu_2" parent="estate.menu_root"/>-->
+
+<!--    &lt;!&ndash; actions &ndash;&gt;-->
+
+<!--    <menuitem name="List" id="estate.menu_1_list" parent="estate.menu_1"-->
+<!--              action="estate.action_window"/>-->
+<!--    <menuitem name="Server to list" id="estate" parent="estate.menu_2"-->
+<!--              action="estate.action_server"/>-->
+
+    </data>
+</odoo>
