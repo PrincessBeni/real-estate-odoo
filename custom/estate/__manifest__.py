@@ -24,15 +24,15 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/estate_property_views.xml',
+        'security/ir.model.access.csv',
+        'views/estate_prop_view.xml',
         'views/estate_menus.xml',
-        'views/views.xml',
-        'views/templates.xml',
+        # 'views/views.xml',
+        # 'views/templates.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    # 'demo': [
+    #     'demo/demo.xml',
+    # ],
     'application': 'True',
 }

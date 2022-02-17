@@ -40,13 +40,7 @@
     </record>
 -->
 
-<!--            <menuitem id="estate_menu_root" name="Estate">-->
-<!--            &lt;!&ndash; menu categories &ndash;&gt;-->
-<!--            <menuitem id="first_level_estate_menu" name="First Menu">-->
-<!--                <menuitem id="estate_model_action_level" action="estate_model_action"/>-->
-<!--            </menuitem>-->
-<!--        </menuitem>-->
-<!--    -->
+
 
 
     <!-- Top menu item -->

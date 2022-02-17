@@ -1,0 +1,108 @@
+<odoo>
+    <data>
+        <!--        Add a custom form view.-->
+        <!--        Form view of our individual properties-->
+        <record id="estate_form" model="ir.ui.view">
+            <field name="name">estate.property.form</field>
+            <field name="model">estate.estate</field>
+            <field name="arch" type="xml">
+                <form string="Property">
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="estate_prop"-->
+<!--                                    class="oe_stat_button">-->
+<!--                                <div class="o_stat_info">-->
+<!--                                    <field name="name" class="o_stat_value"/>-->
+<!--                                    <span class="o_stat_text">Properties</span>-->
+<!--                                </div>-->
+<!--                            </button>-->
+<!--                        </div>-->
+
+
+                        <!--     Name or title of our property-->
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <div class="oe_edit_only">
+                                <label for="name"/>
+                            </div>
+                            <h1 class="mb32">
+                                <field name="name" class="mb16"/>
+                            </h1>
+                            <field name="active" invisible="1"/>
+                        </div>
+
+                        <group col="4">
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
+                        <notebook>
+                            <page string="Description" name="description">
+                                <group>
+                                    <group>
+                                        <field name="property_description"/>
+                                        <field name="no_bedrooms"/>
+                                        <field name="living_area"/>
+                                        <field name="facades"/>
+                                        <field name="garage"/>
+                                        <field name="garden"/>
+                                        <field name="garden_area"/>
+                                        <field name="garden_orientation"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- explicit list view definition -->
+        <!--        in the list (tree) view, we want to display more than just the name.-->
+        <record model="ir.ui.view" id="estate_list">
+            <field name="name">Estate List</field>
+            <field name="model">estate.estate</field>
+            <field name="arch" type="xml">
+                <tree string="Channel">
+                    <field name="name"/>
+                    <field name="postcode"/>
+                    <field name="no_bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="date_availability"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--         actions opening views on models-->
+        <record id="estate_property_action" model="ir.actions.act_window">
+            <field name="name">Properties</field>
+            <field name="res_model">estate.estate</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--Add a custom search view-->
+        <record id="estate_property_search" model="ir.ui.view">
+            <field name="name">estate.property.search</field>
+            <field name="model">estate.estate</field>
+            <field name="arch" type="xml">
+                <search string="Tests">
+                    <field name="name"/>
+                    <field name="postcode"/>
+                    <field name="no_bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="date_availability"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>
