@@ -8,17 +8,6 @@
             <field name="arch" type="xml">
                 <form string="Property">
                     <sheet>
-<!--                        <div class="oe_button_box" name="button_box">-->
-<!--                            <button name="estate_prop"-->
-<!--                                    class="oe_stat_button">-->
-<!--                                <div class="o_stat_info">-->
-<!--                                    <field name="name" class="o_stat_value"/>-->
-<!--                                    <span class="o_stat_text">Properties</span>-->
-<!--                                </div>-->
-<!--                            </button>-->
-<!--                        </div>-->
-
-
                         <!--     Name or title of our property-->
                         <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
                                 attrs="{'invisible': [('active', '=', True)]}"/>
@@ -26,18 +15,21 @@
                             <div class="oe_edit_only">
                                 <label for="name"/>
                             </div>
-                            <h1 class="mb32">
+                            <h1 class="mb64">
                                 <field name="name" class="mb16"/>
                             </h1>
                             <field name="active" invisible="1"/>
                         </div>
-
-                        <group col="4">
-                            <field name="postcode"/>
-                            <field name="date_availability"/>
-
-                            <field name="expected_price"/>
-                            <field name="selling_price"/>
+                        <group>
+                            <group colspan="2" col="2">
+                                <field name="postcode"/>
+                                <field name="date_availability"/>
+                            </group>
+                            <group col="2">
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </group>
                         </group>
                         <notebook>
                             <page string="Description" name="description">
@@ -49,13 +41,16 @@
                                         <field name="facades"/>
                                         <field name="garage"/>
                                         <field name="garden"/>
+                                        <field name="state"/>
                                         <field name="garden_area"/>
                                         <field name="garden_orientation"/>
                                     </group>
                                 </group>
                             </page>
-                        </notebook>
+                            <page string="SOme">
 
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -76,6 +71,7 @@
                     <field name="expected_price"/>
                     <field name="selling_price"/>
                     <field name="date_availability"/>
+                    <field name="tag_ids"/>
                 </tree>
             </field>
         </record>
@@ -87,12 +83,13 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-<!--Add a custom search view-->
+
+        <!--Add a custom search view-->
         <record id="estate_property_search" model="ir.ui.view">
             <field name="name">estate.property.search</field>
             <field name="model">estate.estate</field>
             <field name="arch" type="xml">
-                <search string="Tests">
+                <search string="Search">
                     <field name="name"/>
                     <field name="postcode"/>
                     <field name="no_bedrooms"/>
@@ -100,9 +97,17 @@
                     <field name="expected_price"/>
                     <field name="selling_price"/>
                     <field name="date_availability"/>
+                    <!--a filter which displays available properties, i.e. the state should be ‘New’ or ‘Offer Received’.-->
+                    <!--the ability to group results by postcode-->
+                    <separator/>
+                    <filter string="New or Offer Received" name="available_properties"
+                            domain="['|',('state', '=', 'new_state'),('state', '=', 'offer_received')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Postcode" name="postcode"
+                                context="{'group_by':'postcode'}"/>
+                    </group>
                 </search>
             </field>
         </record>
-
     </data>
 </odoo>

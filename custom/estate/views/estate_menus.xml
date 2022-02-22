@@ -1,9 +1,13 @@
 <odoo>
-    <data>
-        <menuitem name="Real Estate" id="estate_menu_root" sequence="0">
-            <menuitem name="Advertisements" id="estate_first_menu">
-                <menuitem id="estate_action_window" action="estate_property_action"/>
-            </menuitem>
+
+    <menuitem name="Real Estate" id="estate_menu_root" sequence="0">
+        <menuitem name="Settings" id="estate_second_menu">
+            <menuitem id="estate_type_action_window" action="property_type_action"/>
+            <menuitem id="estate_property_tag_action_window" action="property_tag_action"/>
         </menuitem>
-    </data>
+        <menuitem name="Advertisements" id="estate_first_menu">
+            <menuitem id="estate_action_window" action="estate_property_action"/>
+        </menuitem>
+    </menuitem>
+
 </odoo>

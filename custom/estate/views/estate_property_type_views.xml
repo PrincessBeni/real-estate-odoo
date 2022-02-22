@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <!--        Add a custom form view.-->
+        <!--        Form view of our individual types of properties-->
+        <record id="estate_property_type_form" model="ir.ui.view">
+            <field name="name">estate.property.type.form</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <form string="Property Type">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <div class="oe_edit_only">
+                                <label for="type_name"/>
+                            </div>
+                            <h1 class="mb32">
+                                <field name="type_name" class="mb16"/>
+                            </h1>
+                            <field name="active" invisible="1"/>
+                        </div>
+
+                        <group col="4">
+                            <field name="property_type_id"/>
+                             <field name="postcode"/>
+                            <field name="date_availability"/>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
+<!--                        <field name="estate_lines_ids">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="product_id"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+                        <notebook>
+                            <page name="description" string="Description">
+                                <group>
+                                    <field name="property_description"/>
+                                </group>
+                            </page>
+                        <page name="other_info" string="Other Info">
+                            <group>
+                                <field name="salesperson"/>
+                                <field name="buyer"/>
+                            </group>
+                        </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!--        tree view of types of properties-->
+        <record id="estate_property_type_view_tree" model="ir.ui.view">
+            <field name="name">estate.property.type.view.tree</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <tree string="estate_property_type_tree">
+                    <field name="type_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        Add property type and settings menus -->
+        <record id="property_type_action" model="ir.actions.act_window">
+            <field name="name">Property Types</field>
+            <field name="res_model">estate.property.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        search-->
+        <record id="estate_property_type_view_search" model="ir.ui.view">
+           <field name="name">estate.property.type.view.search</field>
+           <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+              <field name="type_name"/>
+            </search>
+           </field>
+        </record>
+
+
+    </data>
+</odoo>

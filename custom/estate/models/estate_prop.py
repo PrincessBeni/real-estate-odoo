@@ -24,7 +24,7 @@ class Estate(models.Model):
 
     date_availability = fields.Date(string='Available From', copy=False,
                                     default=lambda self: fields.Datetime.now() + relativedelta.relativedelta(months=3))
-    tags = fields.Char(string='Tags', translate=True)
+    tag_ids = fields.Many2many(comodel_name='estate.property.tag', string='Tags')
     no_bedrooms = fields.Integer(string='No. of Bedrooms', default=2)
     living_area = fields.Integer(string='Living Area (sqm)')
     expected_price = fields.Float(string='Expected Price', required=True)
@@ -51,3 +51,11 @@ class Estate(models.Model):
     #                                                     ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'),
     #                                                     ('canceled', 'Canceled')])
     property_description = fields.Text(string='Property Description')
+    # estate_lines_ids = fields.One2many('estate.line','estate_id')
+
+# one2many code
+# class EstateLine(models.Model):
+#     _name = 'estate.line'
+#
+#     product_id = fields.Many2one('product.product', string='Product')
+#     estate_id = fields.Many2one('estate.property.type')

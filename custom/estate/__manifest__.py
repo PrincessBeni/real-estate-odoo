@@ -20,12 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','account'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'views/estate_prop_view.xml',
+        'views/estate_property_type_views.xml',
+        'views/estate_property_tag_views.xml',
         'views/estate_menus.xml',
         # 'views/views.xml',
         # 'views/templates.xml',
