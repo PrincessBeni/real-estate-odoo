@@ -51,11 +51,17 @@ class Estate(models.Model):
     #                                                     ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'),
     #                                                     ('canceled', 'Canceled')])
     property_description = fields.Text(string='Property Description')
-    # estate_lines_ids = fields.One2many('estate.line','estate_id')
+    buyer = fields.Many2one('res.users', string='Buyer', copy=False)
+    salesperson = fields.Many2one(comodel_name='res.partner', string='Sales Person', required=False,
+                                  default=lambda self: self.env.user)
+    offer_ids = fields.One2many(comodel_name='estate.property.offer', inverse_name='property_id',
+                                required=False)
 
-# one2many code
+
+# one2many code. This class is linked to the estate_property_type_class
 # class EstateLine(models.Model):
 #     _name = 'estate.line'
 #
 #     product_id = fields.Many2one('product.product', string='Product')
 #     estate_id = fields.Many2one('estate.property.type')
+#     price = fields.Float(string='Price', required=False)
