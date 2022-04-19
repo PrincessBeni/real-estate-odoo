@@ -4,7 +4,7 @@
             <field name="name">estate.property.tag.view.tree</field>
             <field name="model">estate.property.tag</field>
             <field name="arch" type="xml">
-                <form string="_form">
+                <form string="form">
                     <sheet>
                         <!--     Name or title of our property-->
                         <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
@@ -20,7 +20,7 @@
                         </div>
                         <group>
                             <field name="name"/>
-<!--                            <field name="tag_ids" widget="many2many_tags"/>-->
+                            <!--                            <field name="tag_ids" widget="many2many_tags"/>-->
                         </group>
                     </sheet>
                 </form>
@@ -31,7 +31,7 @@
             <field name="name">estate.property.tag.view.tree</field>
             <field name="model">estate.property.tag</field>
             <field name="arch" type="xml">
-                <tree string="estate_property_tag_tree">
+                <tree string="estate_property_tag_tree" editable="bottom">
                     <field name="name"/>
                 </tree>
             </field>
