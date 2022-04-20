@@ -14,15 +14,11 @@ class EstatePropertyOffer(models.Model):
                               required=False, copy=False)
     partner_id = fields.Many2one(comodel_name='res.partner', string='Partner', required=True)
     property_id = fields.Many2one(comodel_name='estate.estate', required=True)
-    deadline_date = fields.Date(string='Deadline',
-                                required=False)
-    validity = fields.Integer(compute='_compute_deadline_date',
-                              string='Validity(days)', required=False)
-    property_type_id = fields.Many2one(related='property_id.property_type_id', string='PropertyType', store=True)
 
-    # validity = fields.Integer(compute='_compute_deadline_date', inverse='_inverse_deadline_date',
-    #                           string='Validity(days)', required=False)
-    # Add the following constraints to their corresponding models:
+    validity = fields.Integer("Offer Validity", default=7)
+    deadline_date = fields.Date(string='Deadline', compute="_compute_deadline_date", inverse="_inverse_deadline_date")
+
+    property_type_id = fields.Many2one(related='property_id.property_type_id', string='PropertyType', store=True)
 
     # An offer price must be strictly positive
     _sql_constraints = [
@@ -30,28 +26,16 @@ class EstatePropertyOffer(models.Model):
          'The price of an offer must be a positive number.')
     ]
 
-    @api.depends('deadline_date')
+    @api.depends("validity")
     def _compute_deadline_date(self):
-        create_date = datetime.date.today()
+        for duration in self:
+            if duration.create_date:
+                duration.deadline_date = duration.create_date + datetime.timedelta(days=duration.validity)
+
+    def _inverse_deadline_date(self):
         for duration in self:
             if duration.deadline_date:
-                deadline_date = fields.Datetime.to_datetime(duration.deadline_date).date()
-                total_validity = (deadline_date - create_date).days / (365.242 / 365.242)
-                duration.validity = total_validity
-            else:
-                duration.validity = 0
-
-    # invserse code reserved for later
-    # def _inverse_deadline_date(self):
-    #     for duration in self:
-    #         if duration.validity:
-    #             duration.deadline_date = duration.validity+datetime.date.today()
-
-    # class EstateLine(models.Model):
-    #     _name = 'estate.line'
-    #     product_id = fields.Many2one('product.product', string='Product')
-    #     estate_id = fields.Many2one('estate.property.type')
-    #     string = 'Property_id', required = True
+                duration.validity = (duration.deadline_date - duration.create_date.date()).days
 
     # Add the buttons Accept and Refuse
     # When an offer is accepted, set the buyer and the selling price for the corresponding property.

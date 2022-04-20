@@ -12,13 +12,10 @@
                     <header>
                         <button name="action_sold" type="object" string="Sold" class="oe_highlight"
                                 states="new_state,offer_received,offer_accepted"/>
-                        <!-- <button name="action_sold" type="object" string="Sold" class="oe_highlight" attrs="{'invisible': ['|', ('state', 'not in', ['new_state', 'offer_received','offer_accepted']), ('id', '=', False)]}"/>-->
                         <button name="action_cancelled" type="object" string="Cancel" class="oe_highlight"
                                 states="new_state,offer_received,offer_accepted"/>
-                        <!-- <button name="action_cancelled" type="object" string="Cancel" class="oe_highlight" attrs="{'invisible': ['|', ('state', 'not in', ['new_state', 'offer_received','offer_accepted']), ('id', '=', False)]}"/>-->
                         <field name="state" widget="statusbar"
                                statusbar_visible="new_state,offer_received,offer_accepted,sold"/>
-                        <field name="postcode"/>
                     </header>
                     <sheet>
                         <!-- Name or title of our property-->
@@ -39,7 +36,7 @@
                                        options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                                 <field name="postcode"/>
                                 <field name="date_availability"/>
-                                <!--                                <field name="state"/>-->
+                                <!--   <field name="state"/>-->
                             </group>
                             <group>
                                 <field name="expected_price"/>
