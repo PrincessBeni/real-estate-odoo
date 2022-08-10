@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <record id="published_library_book_view_form" model="ir.ui.view">
+         <field name="name">Published Library Book Form</field>
+         <field name="model">res.partner</field>
+         <field name="arch" type="xml">
+              <form>
+             <field name="published_book_ids"/>
+              </form>
+         </field>
+     </record>
+
+
+        <record id='published_library_book_action' model='ir.actions.act_window'>
+        <field name="name">Published Library Books</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

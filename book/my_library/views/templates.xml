@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    Override the qweb template in a file called views/templates.xml-->
+    <template id="show_website_info"
+              inherit_id="website.show_website_info">
+        <xpath expr="//dl[@t-foreach='apps']"
+               position="replace">
+            <table class="table">
+                <tr t-foreach="apps" t-as="app">
+                    <th>
+                        <a t-att-href="app.website">
+                            <t t-esc="app.name"/>
+                        </a>
+                    </th>
+                    <td>
+                        <t t-esc="app.summary"/>
+                    </td>
+                </tr>
+            </table>
+        </xpath>
+    </template>
+
+<!--    Create a custom assets bundle   -->
+    <template id="my_custom_assets" name="My Custom Assets">
+        <head>
+            <t t-call-assets="library_book.my_custom_assets"
+               t-js="false"/>
+            <t t-call-assets="library_book.my_custom_assets"
+               t-css="false"/>
+        </head>
+        <link rel="stylesheet" type="text/scss"
+              href="/my_module/static/src/scss/my_scss.scss"/>
+        <link rel="stylesheet" type="text/css"
+              href="/my_module/static/src/scss/my_css.css"/>
+        <script type="text/JavaScript"
+                src="/my_module/static/src/js/widgets/my_avaScript.js"/>
+    </template>
+
+<!--    Template for displaying books-->
+<template id="books">
+    <t t-call="website.layout">
+        <div class="oe_structure">
+            <section class="pt32 pb32 bg-secondary oe_custom_bg">
+                <div class="container text-center">
+                    <h1>Editable text and supports drag and
+                        drop.
+                    </h1>
+                </div>
+                <div class="container">
+                    <t t-foreach="books" t-as="book">
+                        <div t-attf-class="card mt-3 #{'bg-info' if book_odd else ''}">
+                            <div class="card-body" id="card_body">
+                                <h3 t-field="book.name"/>
+                                <t t-if="book.date_release">
+                                    <div t-field="book.date_release"
+                                         class="text-muted"/>
+                                </t>
+                                <b class="mt8">Authors</b>
+                                <ul>
+                                    <li t-foreach="book.author_ids" t-as="author">
+                                        <span t-esc="author.name"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </section>
+        </div>
+        <div t-attf-class="card mt24 #{'bg-light' if book_odd else ''}">
+                    <div class="card-body">
+                        <h3 t-field="book.name"/>
+                        <t t-if="book.date_release">
+                            <div t-field="book.date_release" class="text-muted"/>
+                        </t>
+                        <b class="mt8">Authors</b>
+                        <ul>
+                            <li t-foreach="book.author_ids"
+                                t-as="author">
+                                <span t-esc="author.name"/>
+                            </li>
+                        </ul>
+                        <a t-attf-href="/books/#{book.id}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-book"/>
+                            Book Detail
+                        </a>
+                    </div>
+                </div>
+        <section class="container mt16" contenteditable="False">
+            This is a non-editable text after the list of
+            books.
+        </section>
+    </t>
+</template>
+
+<!--    Display the count of authors near the Authors label by inheriting the books template-->
+    <template id="books_ids_inh" inherit_id="my_library.books">
+        <xpath expr="//div[@id='card_body']/b" position="replace">
+            <b class="mt8">Authors (<t t-esc="len(book.author_ids)"/>)
+            </b>
+        </xpath>
+    </template>
+
+    <template id="book_detail" name="Books Detail">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row mt16">
+                    <div class="col-5">
+                        <span t-field="book.image"
+                              t-options="{'widget': 'image','class': 'mx-auto d-blockimg-thumbnail'}"/>
+                    </div>
+                    <div class="offset-1 col-6">
+                        <h1 t-field="book.name"/>
+                        <t t-if="book.date_release">
+                            <div t-field="book.date_release"
+                                 class="text-muted"/>
+                        </t>
+                        <b class="mt8">Authors</b>
+                        <ul>
+                            <li t-foreach="book.author_ids"
+                                t-as="author">
+                                <span t-esc="author.name"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div t-field="book.html_description"/>
+        </t>
+    </template>
+
+</odoo>
